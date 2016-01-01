@@ -1,0 +1,27 @@
+{
+  "name": "Canvas Wolf",
+  "authors": [
+    "JP DeVries <mail@devries.jp>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "canvas",
+    "SVG",
+    "Thinkful"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "canvg": "~1.3.0"
+  }
+}
