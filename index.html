@@ -6,6 +6,7 @@
         body {
           margin:0;
           text-align:center;
+          background:#fbf8e2;
         }
         body footer {
           margin-top:100vh;
@@ -456,7 +457,10 @@
         <div id="super-cool-wolf"><!-- this part of the DOM will be governed by React to make the illustration interactive and animated -->
             <noscript>
                 <div style="text-align:center">
-                    <img src="assets/img/wolf-design.svg" alt="Polygon Art of a Lion's Face">
+                  <svg role="img" class="icon">
+                    <use xlink:href="#wolf"></use>
+                  </svg>
+                    <!--img src="assets/img/wolf-design.svg" alt="Polygon Art of a Lion's Face"-->
                     <p>Please enable JavaScript to experience interactive animation.</p>
                 </div>
             </noscript>
@@ -466,7 +470,7 @@
 
         <footer>
           <form>
-            <label for="distort_shapes">Distort Shapes</label>
+            <label for="distort_shapes">Follow Mouse</label>
             <input name="distort_shapes" type="checkbox" value="1" />
             <label for="compmode">&emsp;Blend/Composite Mode</label>
             <select id="compmode">
@@ -502,16 +506,22 @@
                 <option value="xor">xor</option>
               </optgroup>
             </select>
-            <label>&emsp;Draw Background</label>
-            <input type="checkbox" name="draw_bg" value="1" disabled />
             <label>&emsp;Oscillate</label>
             <input type="checkbox" name="osscillate" checked value="1" />
+            <label>&emsp;Oscillation Range</label>
+            <input type="range" min="0" max="40" step="0.5" name="osc_range" checked value="16" />
+            <label>&emsp;Oscillation Frequency</label>
+            <input type="range" min="0" max="0.38" step="0.005" name="osc_freq" checked value="0.01" />
+            <label>&emsp;Fill Polygons</label>
+            <input type="checkbox" name="fill_polygons" checked value="1" />
+            <label>&emsp;Draw Non&ndash;Polygon Shapes</label>
+            <input type="checkbox" name="draw_non_poly" value="1" />
           </form>
           <div style="text-align:center;line-height:1.6em">
               <p>Please view in <a href="https://www.google.com/chrome/">Chrome</a>.</p>
               <p>
-                  <a href="http://www.freepik.com">Designed by Freepik</a><br>
-                  <a href="http://devries.jp">Scripted by JP&nbsp;DeVries</a>
+                  <a href="http://www.freepik.com/free-vector/triangle-wolf-design_723866.htm">Designed by Freepik</a><br>
+                  <a href="http://github.com/jpdevries">Scripted by JP&nbsp;DeVries</a>
               </p>
           </div>
         </footer>
