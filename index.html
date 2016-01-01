@@ -7,8 +7,22 @@
           margin:0;
           text-align:center;
         }
+        body footer {
+          margin-top:100vh;
+        }
+        .hidden {
+          display:none;
+        }
+        #canvas, #canvas_bg {
+          position:absolute;
+          top:0;
+          left:0;
+          right:0;
+          bottom:0;
+          z-index:0;
+        }
         #canvas {
-          margin:0 auto;
+          z-index:100;
         }
         </style>
     </head>
@@ -447,6 +461,7 @@
                 </div>
             </noscript>
             <canvas id="canvas" width="522px" height="620px"></canvas>
+            <canvas id="canvas_bg" class="hidden" width="522px" height="620px"></canvas>
         </div>
 
         <footer>
@@ -458,9 +473,9 @@
               <optgroup label="Blend Mode">
                 <option normal="normal">normal</option>
                 <option value="difference">difference</option>
-                <option value="multiply">multiply</option>
+                <option value="multiply" selected>multiply</option>
                 <option value="screen">screen</option>
-                <option value="overlay" selected>overlay</option>
+                <option value="overlay">overlay</option>
                 <option value="darken">darken</option>
                 <option value="lighten">lighten</option>
                 <option value="color-dodge">color-dodge</option>
@@ -487,6 +502,10 @@
                 <option value="xor">xor</option>
               </optgroup>
             </select>
+            <label>&emsp;Draw Background</label>
+            <input type="checkbox" name="draw_bg" value="1" disabled />
+            <label>&emsp;Oscillate</label>
+            <input type="checkbox" name="osscillate" checked value="1" />
           </form>
           <div style="text-align:center;line-height:1.6em">
               <p>Please view in <a href="https://www.google.com/chrome/">Chrome</a>.</p>
