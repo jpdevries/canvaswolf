@@ -1,13 +1,13 @@
 window.onload = function() {
 
   var followMouse = false, // whether or not to "follow the mouse"
-  polygonData = [], // array of data objects, one for each point
-  lastMousePos = new Point(window.innerWidth * .5, window.innerHeight * .5), // where the mouse was last, assume the mouse starts at the center
+  polygonData = [], // array to hold data objects, one for each point
+  lastMousePos = Point(window.innerWidth * .5, window.innerHeight * .5), // where the mouse was last, assume the mouse starts at the center
 
   canvas = document.getElementById("canvas"), // our <canvas> tag in the index.html DOM
   ctx = canvas.getContext("2d"),
   // query the DOM once for these elements by using pointer variables
-  osscillate = document.querySelector('input[name="osscillate"]'),
+  oscillate = document.querySelector('input[name="oscillate"]'),
   fillPolygons = document.querySelector('input[name="fill_polygons"]'),
   oscillationRange = document.querySelector('input[name="osc_range"]'),
   oscillationFrequency = document.querySelector('input[name="osc_freq"]'),
@@ -15,9 +15,14 @@ window.onload = function() {
   compmode = document.getElementById('compmode'),
   followMouseCheckbox = document.querySelector('input[name="follow_mouse"]');
 
-  function Point(x, y) { // used to store coordinates 
-    this.x = x;
-    this.y = y;
+
+  checkUrlParams();
+
+  function Point(x, y) { // used to store coordinates
+    return {
+      x:x,
+      y:y
+    }
   }
 
   function Polygon(fill,points,tick) { // data object for polygons
@@ -33,7 +38,7 @@ window.onload = function() {
   }
 
   document.body.onmousemove = function(e) { // whenever the mouse is moved
-    lastMousePos = new Point(e.pageX, e.pageY); // store the current mouse position
+    lastMousePos = Point(e.pageX, e.pageY); // store the current mouse position
   };
 
   function handleResize() {
@@ -57,7 +62,7 @@ window.onload = function() {
 
       polygon.remove(); // remove the shape from the SVG
 
-      polygonData.push(new Polygon(fill,points)); // create a new Polygon and store it. We'll loop through all these to draw them on each step()
+      polygonData.push(Polygon(fill,points)); // create a Polygon and store it. We'll loop through all these to draw them on each step()
     }
   })();
 
@@ -101,7 +106,7 @@ window.onload = function() {
       x = parseFloat(point.split(',')[0]),
       y = parseFloat(point.split(',')[1]);
 
-      if(osscillate.checked) { // apply oscillation effect using a sin wave
+      if(oscillate.checked) { // apply oscillation effect using a sin wave
         if(i == 1) {
           x += Math.sin(polygon.tick) * oscillationRange.value; // second point in polygon moves horizontally
         } else if(i == 2) {
@@ -139,8 +144,6 @@ window.onload = function() {
     var domURL = self.URL || self.webkitURL || self;
     var url = domURL.createObjectURL(blob);
 
-    // Load up our image.
-
     source.width = '522';
     source.height = '620';
 
@@ -153,4 +156,34 @@ window.onload = function() {
 
     return source;
   }
+
+  function checkUrlParams() { 
+    var elements = document.querySelectorAll('[data-url-param]');
+    for(var i = 0; i < elements.length; i++) {
+      var element = elements[i];
+      var key = element.getAttribute('data-url-param');
+      if($_GET(key) !== null) {
+        if(element.type == "checkbox") {
+          element.checked = ($_GET(key) == "1") ? true : false;
+        } else {
+          element.value = $_GET(key);
+        }
+      }
+    }
+  }
+}
+
+function $_GET(param) { // http://www.creativejuiz.fr/blog/en/javascript-en/read-url-get-parameters-with-javascript
+	var vars = {};
+	window.location.href.replace(
+		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+		function( m, key, value ) { // callback
+			vars[key] = value !== undefined ? value : '';
+		}
+	);
+
+	if ( param ) {
+		return vars[param] ? vars[param] : null;
+	}
+	return vars;
 }
