@@ -465,13 +465,12 @@
                 </div>
             </noscript>
             <canvas id="canvas" width="522px" height="620px"></canvas>
-            <canvas id="canvas_bg" class="hidden" width="522px" height="620px"></canvas>
         </div>
 
         <footer>
           <form>
-            <label for="distort_shapes">Follow Mouse</label>
-            <input name="distort_shapes" type="checkbox" value="1" />
+            <label for="follow_mouse">Follow Mouse</label>
+            <input name="follow_mouse" type="checkbox" value="1" />
             <label for="compmode">&emsp;Blend/Composite Mode</label>
             <select id="compmode">
               <optgroup label="Blend Mode">
@@ -509,7 +508,7 @@
             <label>&emsp;Oscillate</label>
             <input type="checkbox" name="osscillate" checked value="1" />
             <label>&emsp;Oscillation Range</label>
-            <input type="range" min="0" max="40" step="0.5" name="osc_range" checked value="16" />
+            <input type="range" min="0" max="40" step="0.5" name="osc_range" checked value="8" />
             <label>&emsp;Oscillation Frequency</label>
             <input type="range" min="0" max="0.38" step="0.005" name="osc_freq" checked value="0.01" />
             <label>&emsp;Fill Polygons</label>
@@ -527,6 +526,6 @@
         </footer>
     </div>
 
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.min.js"></script>
     </body>
 </html>
